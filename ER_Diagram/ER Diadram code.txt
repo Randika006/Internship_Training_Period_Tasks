@@ -1,0 +1,73 @@
+erDiagram
+    blog_categories ||--|{blog_post_categories:has
+    blog_post_categories ||--|{blog_posts:has
+    blog_posts ||--|{blog_posts:contains
+
+
+    blog_categories{
+        bigint(20) id PK
+        int(11) parent_id FK
+        varchar(255) title
+        varchar(255) meta_title
+        varchar(255) slug
+        varchar(255) content
+    }
+    blog_posts{
+        bigint(20) id PK
+        int(11) author_id FK
+        int(11) parent_id FK
+        varchar(255) title
+        varchar(255) meta_title
+        varchar(255) slug
+        text summery
+        int(11) published
+        text content
+        timestamp published_at
+
+    }
+
+    blog_post_categories{
+        bigint(20) id PK
+        int(11) post_id FK
+        int(11) category_id FK
+         
+    }
+
+    blog_posts ||--|{blog_posts_metas:has
+    blog_posts ||--|{blog_posts_comments:has
+    blog_posts ||--|{blog_posts_tags:has
+
+    blog_tags ||--|{blog_posts_tags:has
+
+    blog_posts_comments{
+        bigint(20) id PK
+        int(11) post_id FK
+        int(11) parent_id FK
+        varchar(255) title
+        int(11) published
+        text content
+        timestamp published_at 
+
+    }
+
+    blog_posts_metas{
+        bigint(20) id PK
+        int(11) post_id FK
+        varchar(255) key
+        text content
+    }
+
+    
+    blog_tags{
+        bigint(20) id PK
+        varchar(255) title
+        varchar(255) meta_title
+        varchar(255) slug
+        text content
+    }
+
+    blog_posts_tags{
+        bigint(20) id PK
+        int(11) post_id FK
+        int(11) tag_id FK
+    }  
